@@ -1,14 +1,14 @@
 'use client';
 
-import GeminiPrompt from "@/components/GeminiPrompts";
-import { SandpackCodeEditor, SandpackFileExplorer, SandpackLayout, SandpackPreview, SandpackProvider, SandpackTheme } from "@codesandbox/sandpack-react";
-
+import ListCard from "./_components/ListCard";
+import { useToast } from "@/hooks/use-toast";
 
 
 export default function Home() {
+  const { toast } = useToast();
   return (
     <>
-      <GeminiPrompt />
+      <ListCard />
     </>
   );
 }

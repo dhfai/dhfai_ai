@@ -17,7 +17,7 @@ const Layout = ({children}: {children: React.ReactNode}) => {
                 </div>
             </header>
             <Separator />
-            <div className='flex-1 container py-4 text-accent-foreground'>
+            <div className='flex-1 py-4 text-accent-foreground'>
                 {children}
             </div>
         </div>
