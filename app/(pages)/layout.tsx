@@ -1,14 +1,18 @@
-
+'use client'
 import BreadCrumbHeader from '@/components/BreadCrumbHeader'
-import DesktopSidebar from '@/components/Sidebar'
+import {DesktopSidebar, EditorSideBar} from '@/components/Sidebar'
 import { ThemeModeToggle } from '@/components/ThemeModeToggle'
 import { Separator } from '@/components/ui/separator'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
+
 const Layout = ({children}: {children: React.ReactNode}) => {
-  return (
+    const path = usePathname()
+
+    return (
     <div className='flex h-screen'>
-        <DesktopSidebar />
+        {path.includes('aigenerate/editor') ? <EditorSideBar /> : <DesktopSidebar />}
         <div className='flex flex-col flex-1 min-h-screen'>
             <header className='flex items-center justify-between px-6 py-4 h-[50px] container'>
                 <BreadCrumbHeader />

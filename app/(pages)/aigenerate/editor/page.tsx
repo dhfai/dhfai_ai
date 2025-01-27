@@ -1,6 +1,8 @@
 'use client';
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SandpackCodeEditor, SandpackFileExplorer, SandpackLayout, SandpackPreview, SandpackProvider } from "@codesandbox/sandpack-react";
+import { Code2, Monitor } from "lucide-react";
 
 
 
@@ -9,61 +11,54 @@ export default function Page() {
     <SandpackProvider
       template="react"
       options={{
-        autorun: false,
-        autoReload: false,
-        externalResources: ["https://cdn.tailwindcss.com"]
+        autorun: true,
+        autoReload: true,
       }}
-      files={{
-        "/App.js": `export default function Example() {
-  return (
-    <div className="bg-gray-50">
-      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Ready to dive in?</span>
-          <span className="block text-indigo-600">Start your free trial today.</span>
-        </h2>
-        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div className="inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
+     >
+      <div className="border-b">
+        <Tabs defaultValue="preview" className="w-full">
+          <TabsList className="h-11 w-full justify-start rounded-none bg-background px-4 border-b border-b-transparent">
+            <TabsTrigger
+              value="code"
+              className="data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground hover:text-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground"
             >
-              Get started
-            </a>
-          </div>
-          <div className="ml-3 inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
+              <Code2 className="mr-2 h-4 w-4" />
+              Code
+            </TabsTrigger>
+            <TabsTrigger
+              value="preview"
+              className="data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground hover:text-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground"
             >
-              Learn more
-            </a>
-          </div>
-        </div>
+              <Monitor className="mr-2 h-4 w-4" />
+              Preview
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="code">
+            <SandpackLayout style={{ height: "90vh" }}>
+              <SandpackFileExplorer style={{ height: '90vh'}} />
+              <SandpackCodeEditor
+                style={{
+                  fontFamily: "JetBrains Mono, monospace",
+                  fontSize: 14,
+                  lineHeight: 1.5,
+                  width: "100%",
+                  height: "90vh",
+                }}
+                showTabs
+                showLineNumbers={true}
+                showInlineErrors
+                wrapContent
+                closableTabs
+              />
+          </SandpackLayout>
+          </TabsContent>
+          <TabsContent value="preview">
+            <SandpackLayout style={{ height: "90vh" }}>
+              <SandpackPreview style={{ height: '90vh'}} showNavigator />
+            </SandpackLayout>
+          </TabsContent>
+        </Tabs>     
       </div>
-    </div>
-  )
-}`
-      }}
-    >
-      <SandpackLayout style={{ height: "90vh" }}>
-        <SandpackFileExplorer style={{ height: '90vh'}} />
-        <SandpackCodeEditor
-          style={{
-            fontFamily: "JetBrains Mono, monospace",
-            fontSize: 14,
-            lineHeight: 1.5,
-            width: "100%",
-            height: "90vh",
-          }}
-          showTabs
-          showLineNumbers={true}
-          showInlineErrors
-          wrapContent
-          closableTabs
-        />
-        <SandpackPreview style={{ height: '90vh'}} showNavigator />
-      </SandpackLayout>
     </SandpackProvider>
   );
 }

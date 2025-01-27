@@ -1,12 +1,16 @@
 "use client";
 
-import { Bot, CoinsIcon, HomeIcon, Layers2Icon, MenuIcon, ShieldCheckIcon } from 'lucide-react';
+import { Bot, CoinsIcon, HomeIcon, Layers2Icon, MenuIcon, Paperclip, ShieldCheckIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import Link from 'next/link';
 import { Button, buttonVariants } from './ui/button';
 import { usePathname } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import Logo from './Logo';
+import { ScrollArea } from './ui/scroll-area';
+import { cn } from '@/lib/utils';
+import { Input } from './ui/input';
+import ChatInterface from './ChatInterface';
 
 const routes = [
     {
@@ -61,6 +65,24 @@ const DesktopSidebar = () => {
   )
 }
 
+
+interface QuestionInputProps {
+    className?: string
+}
+
+const EditorSideBar = () => {
+  return (
+    <div className='hidden relative md:block max-w-[450px] h-screen overflow-hidden w-full bg-background dark:bg-secondary/30 dark:text-foreground text-muted-foreground border-r-2 border-separate'>
+        <div className='flex items-center justify-center gap-2 border-b-[1px] border-separate p-4'>
+            <Logo />
+        </div>
+        <ChatInterface />
+    </div>
+  )
+}
+
+export { DesktopSidebar, EditorSideBar }
+
 export function MobileSidebar(){
     const [isOpen, setOpen] = useState(false)
     const pathname = usePathname()
@@ -102,5 +124,3 @@ export function MobileSidebar(){
         </div>
     )
 }
-
-export default DesktopSidebar
